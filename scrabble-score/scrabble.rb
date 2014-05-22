@@ -1,5 +1,3 @@
-require 'pry'
-
 class Scrabble
   def initialize(input_word)
     @word    = (input_word || "").strip.downcase
