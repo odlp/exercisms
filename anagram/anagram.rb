@@ -1,16 +1,21 @@
 class Anagram
   def initialize(input_word)
-    @word    = input_word.downcase
-    @letters = letters_in_sequence(@word)
+    @word = input_word.downcase
   end
 
   def match(candidate_terms)
-    candidate_terms.keep_if do |term| 
-      letters_in_sequence(term) == @letters && term.downcase != @word
-    end
+    candidate_terms.reject(&identical_word).keep_if(&letters_match)
   end
 
-  def letters_in_sequence(term)
+  def identical_word
+    proc { |term| term.downcase == @word }
+  end
+
+  def letters_match
+    proc { |term| sort_letters(term) == sort_letters(@word) }
+  end
+
+  def sort_letters(term)
     term.downcase.split('').sort
   end
 end
