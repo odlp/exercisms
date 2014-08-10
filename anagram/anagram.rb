@@ -16,6 +16,6 @@ class Anagram
   end
 
   def sort_letters(term)
-    term.downcase.split('').sort
+    term.downcase.chars.sort
   end
 end
